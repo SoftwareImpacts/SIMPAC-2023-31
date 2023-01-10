@@ -1,0 +1,73 @@
+***************************************************************************************
+***              InputFile for StochHyProp v. 2.01      2023                        ***                            
+***************************************************************************************
+2             ! [Nsets] Number of data sets
+0             ! [Lmrg]  for NSamples >1, create merged output (1) or not (0)
+100000        ! [Nstoch] Number of realizations
+0.0           ! [tau] Bilateral tail exclusion (0-0.49)
+1             ! [Lsterr] Conserve standard error on tail exclusion (1=Yes, 0=No)
+1             ! [Lkey] Wait for key to exit (1=Yes, 0=No)
+*             ! [OutFile] Name of output file (* for default .out and .csv)
+0             ! [Lext] Parameter data (0) below or {ONLY WITH nsets = 1} (1) in RETC or Hydrus output file 
+Hydrus        ! {ONLY WITH nsets = 1} [ExtFile] Name of RETC or HYDRUS output file [default extension .out]
+*
+* Below, add statistics for the parameter sets. Add several sets separated by one dummy line if NSamples>1
+*
+*                               Correlation Matrix                        v                                                   - last number in next line will be used as number of parameters!
+* ParmName  Mean     StErr      1        2        3       4        5       6
+* SAMPLE 1
+Tr          0.00022  0.00225    1     
+Ts          0.63701  0.03574    0.081    1    
+alpha       0.16116  0.04329   -0.1434   0.8556   1   
+n           2.02600  0.31820    0.1343  -0.6907  -0.756   1  
+l          -0.00407  0.08943    0.7563   0.223   -0.1005  0.0778   1
+Ks          0.27136  0.19140    0.0328   0.9233   0.958  -0.8061   0.0134  1 
+* SAMPLE 2
+Tr          0.00040  0.00289    1     
+Ts          0.62088  0.13574    0.081    1    
+alpha       0.12099  0.00491   -0.1434   0.8556   1   
+n           2.16222  0.18666    0.1343  -0.6907  -0.756   1  
+l          -0.18721  0.10022    0.7563   0.223   -0.1005  0.0778   1
+Ks          0.22912  0.12341    0.0328   0.9233   0.958  -0.8061   0.0134  1 
+
+
+
+* SAMPLE 3
+Tr          0.00020  0.00289        1     
+Ts          0.65088  0.13574        0.081    1    
+alpha       0.13099  0.00491       -0.1434   0.8556   1   
+n           2.06222  0.18666        0.1343  -0.6907  -0.756   1  
+l          -0.08721  0.10022        0.7563   0.223   -0.1005  0.0778   1
+Ks          0.27912  0.12341        0.0328   0.9233   0.958  -0.8061   0.0134  1 
+
+*# INSTRUCTIONS - read.me
+*# This software will generate a number [Nreal] of realizations of parameters according to Mean, Standard Error and correlation matrix following Cholesky decomposition.
+*# Running parameters will be read from this file, default name [StochHyProp.stc] - another name may be specified in the command line. Default extension (if none specified): [.stc]
+*# Output will be written to a comma separated values (.csv) file, and to a space separated (.out) file. Default name is the same as the input file, unless overridden by [OutFil] above.
+*# Observe that the parameters number may be varied between 2 and any value above.
+*# Observe that parameter names (above) may be changed and will be copied to the output file.
+*#
+*# The program may be run in batch mode, in which case it may be convenient to specify [Key]=0, avoiding the program to wait for a key-press at the end.
+*#
+*# Special feature 1: TAIL exclusion
+*# In order to avoid extreme values, a tail fraction may be specified as [TAIL]. The tail will be applied on both sides (e.g., Tail=0.01 will eliminate a total of 2% of values).
+*# A consequence of tail exclusion is a reduction of the standard error. This can be corrected for by specifying [ConsStErr] = 1.
+*# Note that the use of a tail will corrupt the assumed normal distribution and should be avoided or limited to the smallest reasonabel value.
+*#
+*# Special feature 2: Read statistics directly from RETC or Hydrus (inverse modeling) output files
+*# Specify the [Data] flag to 1 and the program will look for Mean, Standard Error and correlation matrix in the RETC or Hydrus ouptput files specified as [RETCFil]
+*# instead of in the subsequent lines in this file.
+*#
+
+
+
+
+
+
+
+
+
+
+
+
+*end of file
